@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Free Piano Course: 45 Songs, Beginner to Advanced</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--bg:#faf7f2;--card:#fff;--tx:#1d1a17;--mu:#6b645c;--ac:#b8432f;--ln:#e6dfd5;--bl:#1d1a17;--wh:#fff;--hl:#f0b429}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#171513;--card:#211e1b;--tx:#f3eee7;--mu:#a39a8f;--ac:#e8745f;--ln:#38332e;--bl:#0c0b0a;--wh:#eee8df}}
+:root[data-theme="dark"]{--bg:#171513;--card:#211e1b;--tx:#f3eee7;--mu:#a39a8f;--ac:#e8745f;--ln:#38332e;--bl:#0c0b0a;--wh:#eee8df}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.55 Georgia,'Times New Roman',serif}
+.w{max-width:960px;margin:0 auto;padding:20px 16px 60px}
+h1{font-size:clamp(28px,6vw,44px);line-height:1.1;margin:8px 0}
+h2{font-size:20px;margin:28px 0 10px}
+.mu{color:var(--mu)}
+.top{display:flex;gap:12px;justify-content:space-between;align-items:flex-start;flex-wrap:wrap}
+.acct{background:var(--card);border:1px solid var(--ln);border-radius:12px;padding:10px 12px;font:14px system-ui,sans-serif;max-width:100%}
+.acct input{font:inherit;padding:6px 8px;border:1px solid var(--ln);border-radius:8px;background:var(--bg);color:var(--tx);width:200px;max-width:100%}
+button{font:600 14px system-ui,sans-serif;border:0;border-radius:10px;padding:8px 14px;background:var(--ac);color:#fff;cursor:pointer}
+button.g{background:transparent;color:var(--tx);border:1px solid var(--ln)}
+.bar{height:8px;background:var(--ln);border-radius:9px;overflow:hidden;margin:10px 0 4px}.bar i{display:block;height:100%;background:var(--ac);width:0;transition:width .3s}
+.card{background:var(--card);border:1px solid var(--ln);border-radius:14px;padding:16px;margin-top:14px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0;font:600 13px system-ui,sans-serif}
+.chips span{padding:3px 8px;border-radius:8px;background:var(--bg);border:1px solid var(--ln)}
+.chips span.on{background:var(--hl);color:#000;border-color:var(--hl)}
+.kb{position:relative;height:150px;display:flex;user-select:none;touch-action:manipulation;margin-top:10px}
+.k{flex:1;background:var(--wh);border:1px solid #8886;border-radius:0 0 6px 6px;display:flex;align-items:flex-end;justify-content:center;font:10px system-ui,sans-serif;color:#555;padding-bottom:4px;cursor:pointer}
+.b{position:absolute;top:0;width:5%;height:90px;background:var(--bl);border-radius:0 0 5px 5px;cursor:pointer;z-index:2;transform:translateX(-50%)}
+.k.on,.b.on{background:var(--hl)!important}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+.lv{text-align:left;background:var(--card);color:var(--tx);border:1px solid var(--ln);padding:10px;font:14px system-ui,sans-serif;line-height:1.3}
+.lv b{display:block;font-size:12px;color:var(--mu)}.lv.sel{border-color:var(--ac);box-shadow:0 0 0 2px var(--ac)}.lv.d{background:color-mix(in srgb,var(--ac) 14%,var(--card))}
+ol{padding-left:20px;margin:8px 0}
+.tag{font:600 12px system-ui,sans-serif;color:var(--ac);text-transform:uppercase;letter-spacing:.05em}
+select{font:14px system-ui,sans-serif;padding:7px;border:1px solid var(--ln);border-radius:10px;background:var(--bg);color:var(--tx)}
+.tabs{display:flex;gap:8px;margin-top:14px}.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:12px}
+#fkb{height:230px}#fkb .b{width:4.2%;height:140px;color:#aaa;font:10px system-ui,sans-serif;display:flex;align-items:flex-end;justify-content:center;padding-bottom:5px}#fkb .k{font-size:12px;padding-bottom:8px}
+</style></head><body><div class="w">
+<div class="top"><div><div class="tag">100% free · no payment ever</div><h1>Learn Piano in 45 Songs</h1>
+<p class="mu" style="max-width:520px;margin:0">One song per level, from your very first note to concert-hall pieces. Every level is open, so jump in anywhere.</p></div>
+<div class="acct" id="acct"></div></div>
+<div class="bar"><i id="pb"></i></div><div class="mu" id="pt" style="font:13px system-ui"></div>
+
+<div class="tabs"><button id="tc">📘 Course</button><button id="tf" class="g">🎹 Free Play</button></div>
+<div id="free" hidden><div class="card"><div class="tag">Free mode</div><h2 style="margin:4px 0">Play anything you like</h2>
+<div class="mu">Tap the keys, or use your computer keyboard: A S D F G H J = white keys (C–B), W E T Y U = black keys. Same as the course. Use the octave buttons to move the keys up or down.</div>
+<div class="row"><select id="fw" aria-label="Sound"><option value="triangle">Soft piano</option><option value="sine">Pure sine</option><option value="square">Organ</option><option value="sawtooth">Bright synth</option></select>
+<select id="fd" aria-label="Sustain"><option value="0.5">Short notes</option><option value="1.2" selected>Medium notes</option><option value="2.8">Long notes</option></select>
+<button class="g" id="od">Octave −</button><span id="ol" class="mu" style="font:600 14px system-ui"></span><button class="g" id="ou">Octave +</button></div>
+<div class="row"><button id="rc">● Record</button><button class="g" id="pl">▶ Play recording</button><button class="g" id="cl">Clear</button><span id="rs" class="mu" style="font:13px system-ui"></span></div></div>
+<div class="kb" id="fkb" aria-label="Free play piano"></div></div>
+<div id="course"><div class="card" id="lesson"></div>
+<div class="kb" id="kb" aria-label="Piano keyboard"></div>
+<p class="mu" style="font:13px system-ui;margin:6px 0 0">Tap the keys, or use your computer keyboard: A S D F G H J = white keys (C–B), W E T Y U = black keys.</p>
+
+<h2>Beginner · Levels 1–15</h2><div class="grid" id="g1"></div>
+<h2>Intermediate · Levels 16–30</h2><div class="grid" id="g2"></div>
+<h2>Advanced · Levels 31–45</h2><div class="grid" id="g3"></div>
+</div><p class="mu" style="font-size:13px;margin-top:30px">All songs are public-domain compositions. For advanced levels, pair these lessons with a free score from IMSLP.org.</p>
+</div>
+<script>
+const S=[
+["Mary Had a Little Lamb","Folk","E4 D4 C4 D4 E4 E4 E4 D4 D4 D4 E4 G4 G4","Meet your right hand: thumb on C, one finger per key."],
+["Twinkle, Twinkle, Little Star","Folk","C4 C4 G4 G4 A4 A4 G4 F4 F4 E4 E4 D4 D4 C4","Your first jump: C up to G."],
+["Hot Cross Buns","Folk","E4 D4 C4 E4 D4 C4 C4 C4 C4 C4 D4 D4 D4 D4 E4 D4 C4","Repeated notes train steady rhythm."],
+["Ode to Joy","Beethoven","E4 E4 F4 G4 G4 F4 E4 D4 C4 C4 D4 E4 E4 D4 D4","Five-finger position, smooth legato."],
+["Jingle Bells (chorus)","Pierpont","E4 E4 E4 E4 E4 E4 E4 G4 C4 D4 E4","Play it bouncy and short (staccato)."],
+["Au Clair de la Lune","French folk","C4 C4 C4 D4 E4 D4 C4 E4 D4 D4 C4","Count 4 beats; hold the last note."],
+["London Bridge","Folk","G4 A4 G4 F4 E4 F4 G4 D4 E4 F4 E4 F4 G4","Practice moving between neighbouring fingers."],
+["Row, Row, Row Your Boat","Folk","C4 C4 C4 D4 E4 E4 D4 E4 F4 G4","Feel the 6/8 lilt: two big beats."],
+["Amazing Grace","Traditional","G4 C5 E5 D5 C5 E5 D5 C5 A4 G4","First pickup (upbeat) note, 3/4 time."],
+["When the Saints Go Marching In","Traditional","C4 E4 F4 G4 C4 E4 F4 G4 C4 E4 F4 G4 E4 C4 E4 D4","Add a simple left-hand C."],
+["Brahms’ Lullaby","Brahms","E4 E4 G4 E4 E4 G4 E4 G4 C5 B4 A4 A4 G4","Gentle volume, rocking waltz feel."],
+["Greensleeves","Traditional","A4 C5 D5 E5 F5 E5 D5 B4 G4 A4 B4 C5","Minor key mood; learn the left-hand Am chord."],
+["Canon in D (theme)","Pachelbel","F#5 E5 D5 C#5 B4 A4 B4 C#5","Your first black keys, plus a falling pattern."],
+["Für Elise (opening)","Beethoven","E5 D#5 E5 D#5 E5 B4 D5 C5 A4","Fast alternating fingers; start slowly."],
+["Minuet in G","Petzold","D5 G4 A4 B4 C5 D5 G4 G4 E5 C5 D5 E5 F#5 G5 G4 G4","Hands together for the first time."],
+["Scarborough Fair","Traditional","","Modal sound; left-hand broken chords."],
+["Danny Boy","Traditional","","Long phrases; shape them like singing."],
+["Simple Gifts","Shaker","","Dotted rhythms and steady left hand."],
+["Musette in D","Bach (attr.)","","Drone bass under a lively melody."],
+["Minuet in G minor","Bach (attr.)","","Two-voice independence."],
+["Prelude in C (BWV 846)","Bach","","Arpeggio patterns and pedal basics."],
+["Gymnopédie No. 1","Satie","","Soft touch and gentle pedal."],
+["Clair de Lune (opening)","Debussy","","Colour, rubato and pedalling."],
+["Moonlight Sonata, 1st mvt","Beethoven","","Triplet flow in the right hand."],
+["Turkish March","Mozart","","Grace notes and crisp staccato."],
+["Sonata Facile, K. 545","Mozart","","Alberti bass and clean scales."],
+["Arabesque No. 1","Debussy","","Cross-rhythms: 3 against 2."],
+["Liebesträum No. 3 (theme)","Liszt","","Hand-crossing and singing tone."],
+["Maple Leaf Rag","Joplin","","Ragtime syncopation, left-hand leaps."],
+["The Entertainer","Joplin","","Swing the rhythm; keep the bass steady."],
+["Rondo in D","Mozart","","Ornaments and clear phrasing."],
+["Nocturne Op. 9 No. 2","Chopin","","Ornamented melody over rolling bass."],
+["Prelude Op. 28 No. 4","Chopin","","Voicing: melody above repeated chords."],
+["Minute Waltz","Chopin","","Fast finger agility and evenness."],
+["Pathétique, 2nd mvt","Beethoven","","Cantabile line with inner voices."],
+["Träumerei","Schumann","","Rubato and long arcs of phrase."],
+["Fugue in C minor (WTC I)","Bach","","Three-voice counterpoint."],
+["Prelude in C# minor","Rachmaninoff","","Heavy chords, huge dynamic range."],
+["Fantaisie-Impromptu","Chopin","","Polyrhythm: 4 against 3."],
+["Ballade No. 1","Chopin","","Storytelling, pacing and big climaxes."],
+["Revolutionary Étude","Chopin","","Left-hand speed and stamina."],
+["Waltz in A-flat, Op. 42","Chopin","","Fast broken-chord elegance."],
+["La Campanella","Liszt","","Leaps, repeated notes and precision."],
+["Appassionata, 3rd mvt","Beethoven","","Power, endurance and control."],
+["Hungarian Rhapsody No. 2","Liszt","","Showmanship and virtuoso technique."],
+["Piano Concerto No. 2, 1st mvt (solo reduction)","Rachmaninoff","","Orchestral sound at the piano."]];
+const steps=[
+ t=>["Find the first note on the keyboard above.","Press ‘Hear it’ and watch the keys light up.","Play right hand slowly, then at a steady pulse.","Repeat 3 times with no mistakes to finish."],
+ t=>["Listen to a recording, then read the score (free on IMSLP).","Practise each hand separately in 4-bar chunks.","Combine hands at half speed with a metronome.","Add dynamics and pedal; perform it start to finish."],
+ t=>["Study the structure: mark sections and key changes.","Slow practice in small units; isolate hard passages.","Build speed 5 BPM at a time with a metronome.","Shape phrasing and tone, then record yourself."]];
+const NS=['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
+const f=n=>{const m=/^([A-G]#?)(\d)$/.exec(n);return 440*Math.pow(2,(NS.indexOf(m[1])+12*(+m[2]+1)-69)/12)};
+let ac,cur=0,done=new Set(),user='',tm=[],freeOn=false,base=4,wave='triangle',dur=1.2,rec=false,recT=0,take=[],fmap={};
+function snd(n){try{ac=ac||new(window.AudioContext||window.webkitAudioContext)();const o=ac.createOscillator(),g=ac.createGain();o.type=wave;o.frequency.value=f(n);g.gain.setValueAtTime(wave=='triangle'||wave=='sine'?.4:.2,ac.currentTime);g.gain.exponentialRampToValueAtTime(.001,ac.currentTime+dur);o.connect(g).connect(ac.destination);o.start();o.stop(ac.currentTime+dur)}catch(e){}}
+function lit(n,on){document.querySelectorAll('[data-n="'+n+'"]').forEach(e=>e.classList.toggle('on',on))}
+function hit(n){snd(n);lit(n,1);setTimeout(()=>lit(n,0),180)}
+const kb=document.getElementById('kb'),W=[],keys='asdfghj',bk={w:'C#4',e:'D#4',t:'F#4',y:'G#4',u:'A#4'};
+for(let o=4;o<=5;o++)['C','D','E','F','G','A','B'].forEach(l=>W.push(l+o));
+W.forEach((n,i)=>{const d=document.createElement('div');d.className='k';d.dataset.n=n;d.textContent=n;d.onpointerdown=()=>hit(n);kb.appendChild(d)});
+W.forEach((n,i)=>{if('CDFGA'.includes(n[0])){const nn=n[0]+'#'+n[1],d=document.createElement('div');d.className='b';d.dataset.n=nn;d.style.left=((i+1)/14*100)+'%';d.onpointerdown=()=>hit(nn);kb.appendChild(d)}});
+addEventListener('keydown',e=>{if(freeOn||e.repeat||/INPUT/.test(e.target.tagName))return;const i=keys.indexOf(e.key);if(i>=0)hit(W[i]);else if(bk[e.key])hit(bk[e.key])});
+function key(){return 'pc_'+(user||'guest')}
+function load(){try{done=new Set(JSON.parse(localStorage.getItem(key())||'[]'))}catch(e){done=new Set()}}
+function save(){try{localStorage.setItem(key(),JSON.stringify([...done]))}catch(e){}}
+function acct(){const a=document.getElementById('acct');
+ a.innerHTML=user?`Signed in as <b>${user}</b> <button class="g" id="so">Sign out</button>`:`<div style="margin-bottom:6px">Optional: save progress with your email</div><input id="em" type="email" placeholder="you@email.com"> <button id="si">Save</button>`;
+ if(user)so.onclick=()=>{user='';try{localStorage.removeItem('pc_user')}catch(e){}load();acct();draw()};
+ else si.onclick=()=>{const v=em.value.trim().toLowerCase();if(!/^\S+@\S+\.\S+$/.test(v)){em.focus();return}user=v;try{localStorage.setItem('pc_user',v)}catch(e){}load();acct();draw()}}
+function demo(){tm.forEach(clearTimeout);tm=[];const ns=S[cur][2].split(' ');ns.forEach((n,i)=>{tm.push(setTimeout(()=>{hit(n);document.querySelectorAll('.chips span').forEach((c,j)=>c.classList.toggle('on',i==j))},i*480))});tm.push(setTimeout(()=>document.querySelectorAll('.chips span').forEach(c=>c.classList.remove('on')),ns.length*480))}
+function draw(){
+ const s=S[cur],tier=cur<15?0:cur<30?1:2,L=document.getElementById('lesson'),ns=s[2]?s[2].split(' '):[];
+ L.innerHTML=`<div class="tag">Level ${cur+1} of 45 · ${['Beginner','Intermediate','Advanced'][tier]}</div><h2 style="margin:4px 0">${s[0]}</h2><div class="mu">${s[1]} · Focus: ${s[3]}</div>
+ ${ns.length?`<div class="chips">${ns.map(n=>`<span>${n}</span>`).join('')}</div><button id="hr">▶ Hear it</button> `:`<p class="mu" style="margin:10px 0">Full score: free on IMSLP.org. Use the keyboard below to warm up on the key’s scale.</p>`}
+ <ol>${steps[tier]().map(x=>`<li>${x}</li>`).join('')}</ol>
+ <button id="dn" class="${done.has(cur)?'g':''}">${done.has(cur)?'✓ Completed (tap to undo)':'Mark level complete'}</button>
+ <button class="g" id="nx">Next level →</button>`;
+ if(ns.length)hr.onclick=demo;
+ dn.onclick=()=>{done.has(cur)?done.delete(cur):done.add(cur);save();draw()};
+ nx.onclick=()=>{cur=Math.min(44,cur+1);draw();scrollTo({top:0,behavior:'smooth'})};
+ [1,2,3].forEach(t=>{const g=document.getElementById('g'+t);g.innerHTML='';for(let i=(t-1)*15;i<t*15;i++){const b=document.createElement('button');b.className='lv'+(i==cur?' sel':'')+(done.has(i)?' d':'');b.innerHTML=`<b>Level ${i+1}${done.has(i)?' ✓':''}</b>${S[i][0]}`;b.onclick=()=>{cur=i;draw();scrollTo({top:0,behavior:'smooth'})};g.appendChild(b)}});
+ pb.style.width=done.size/45*100+'%';pt.textContent=done.size+' of 45 levels complete'}
+try{user=localStorage.getItem('pc_user')||''}catch(e){}
+load();acct();draw();
+const $=id=>document.getElementById(id),FW=['a','s','d','f','g','h','j'],FB=['w','e','t','y','u'],BI=[0,1,3,4,5,7,8,10,11,12];
+function fhit(n){hit(n);if(rec)take.push([n,performance.now()-recT])}
+function fbuild(){const k=$('fkb'),Wf=[];k.innerHTML='';fmap={};for(let o=base;o<base+2;o++)'CDEFGAB'.split('').forEach(l=>Wf.push(l+o));
+ Wf.forEach((n,i)=>{const d=document.createElement('div');d.className='k';d.dataset.n=n;d.textContent=n;d.onpointerdown=()=>fhit(n);k.appendChild(d);if(FW[i])fmap[FW[i]]=n});
+ BI.forEach((wi,j)=>{const n=Wf[wi][0]+'#'+Wf[wi][1],d=document.createElement('div');d.className='b';d.dataset.n=n;d.textContent='';d.style.left=((wi+1)/14*100)+'%';d.onpointerdown=()=>fhit(n);k.appendChild(d);if(FB[j])fmap[FB[j]]=n});
+ $('ol').textContent='C'+base+' – B'+(base+1)}
+function mode(f){freeOn=f;$('free').hidden=!f;$('course').hidden=f;$('tc').className=f?'g':'';$('tf').className=f?'':'g';if(f)fbuild()}
+$('tc').onclick=()=>mode(false);$('tf').onclick=()=>mode(true);
+$('fw').onchange=e=>wave=e.target.value;$('fd').onchange=e=>dur=+e.target.value;
+$('od').onclick=()=>{base=Math.max(1,base-1);fbuild()};$('ou').onclick=()=>{base=Math.min(5,base+1);fbuild()};
+$('rc').onclick=()=>{rec=!rec;if(rec){take=[];recT=performance.now()}$('rc').textContent=rec?'■ Stop recording':'● Record';$('rs').textContent=rec?'Recording… play some notes':take.length+' notes saved'};
+$('pl').onclick=()=>{if(rec)$('rc').click();take.forEach(([n,t])=>setTimeout(()=>hit(n),t))};
+$('cl').onclick=()=>{take=[];rec=false;$('rc').textContent='● Record';$('rs').textContent='Cleared'};
+addEventListener('keydown',e=>{if(!freeOn||e.repeat||/INPUT|SELECT/.test(e.target.tagName))return;const n=fmap[e.key.toLowerCase()];if(n)fhit(n)});
+</script></body></html>
